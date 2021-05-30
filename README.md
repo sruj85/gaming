@@ -1,186 +1,42 @@
-# Movies
 
-Given two files `app.js` and a database file `moviesData.db` consisting of two tables `movie` and `director`.
-
-Write APIs to perform CRUD operations on the tables `movie`, `director` containing the following columns,
-
-**Movie Table**
-
-| Columns     | Type    |
-| ----------- | ------- |
-| movie_id    | INTEGER |
-| director_id | INTEGER |
-| movie_name  | TEXT    |
-| lead_actor  | TEXT    |
-
-**Director Table**
-
-| Columns       | Type    |
-| ------------- | ------- |
-| director_id   | INTEGER |
-| director_name | TEXT    |
-
-### API 1
-
-#### Path: `/movies/`
-
-#### Method: `GET`
-
-#### Description:
-
-Returns a list of all movie names in the movie table
-
-#### Response
-
-```
-[
-  {
-    movieName: "Captain America: The First Avenger",
-  },
-
-  ...
-]
-```
-
-### API 2
-
-#### Path: `/movies/`
-
-#### Method: `POST`
-
-#### Description:
-
-Creates a new movie in the movie table. `movie_id` is auto-incremented
-
-#### Request
-
-```
-{
-  "directorId": 6,
-  "movieName": "Jurassic Park",
-  "leadActor": "Jeff Goldblum"
-}
-```
-
-#### Response
-
-```
-Movie Successfully Added
-```
-
-### API 3
-
-#### Path: `/movies/:movieId/`
-
-#### Method: `GET`
-
-#### Description:
-
-Returns a movie based on the movie ID
-
-#### Response
-
-```
-{
-  movieId: 12,
-  directorId: 3,
-  movieName: "The Lord of the Rings",
-  leadActor: "Elijah Wood",
-}
-```
-
-### API 4
-
-#### Path: `/movies/:movieId/`
-
-#### Method: `PUT`
-
-#### Description:
-
-Updates the details of a movie in the movie table based on the movie ID
-
-#### Request
-
-```
-{
-  "directorId": 24,
-  "movieName": "Thor",
-  "leadActor": "Christopher Hemsworth"
-}
-```
-
-#### Response
-
-```
-Movie Details Updated
-
-```
-
-### API 5
-
-#### Path: `/movies/:movieId/`
-
-#### Method: `DELETE`
-
-#### Description:
-
-Deletes a movie from the movie table based on the movie ID
-
-#### Response
-
-```
-Movie Removed
-```
-
-### API 6
-
-#### Path: `/directors/`
-
-#### Method: `GET`
-
-#### Description:
-
-Returns a list of all directors in the director table
-
-#### Response
-
-```
-[
-  {
-    directorId: 1,
-    directorName: "Joe Johnston",
-  },
-
-  ...
-]
-```
-
-### API 7
-
-#### Path: `/directors/:directorId/movies/`
-
-#### Method: `GET`
-
-#### Description:
-
-Returns a list of all movie names directed by a specific director
-
-#### Response
-
-```
-[
-  {
-    movieName: "Captain Marvel",
-  },
-
-  ...
-]
-```
-
-<br/>
-
-Use `npm install` to install the packages.
-
-**Export the express instance using the default export syntax.**
-
-**Use Common JS module syntax.**
+Problem Statement: To Set Up a NodeJS server to simulate Leaderboard for games. 
+Deploy on EC2 if possible 
+Context
+Users can register using phone number and password. Users can login through phone 
+number and password and get access token. Each user will be having a user-profile which 
+stores basic information of the user. (Name, Age, Location, Email Id, phoneNumber). There 
+will be 3 games, each with a unique id. There will be a leaderboard which ranks users based 
+on certain criterias (wins, points scored) for each game. There will be an admin who can 
+post the result of a game between two players.
+Features from the server:
+• User need to be authenticated (JWT/OAuth) when using the APIs
+• User can update his information except phone number
+• Users can get a list of games.
+• An Admin will post the result of a game between two users. The payload for the 
+result will be - gameId, u1Id, u2Id, scoreU1, scoreU2, win (boolean wrt u1, if true 
+then u1 wins else u2 wins).
+• Users cannot post game results
+• Based on results, an aggregated value will be used to get total points for users for 
+each game.
+• Users can see aggregated scores of each user for each game (leaderboard).
+• Example
+o payload1 - {u1Id: 1, u2Id: 2, scoreU1: 30, scoreU2: 40, win: false, gameId:1}
+o Payload2 - {u1Id: 2, u2Id: 3, scoreU1: 45, scoreU2: 40, win: true, gameId:1}
+o Payload3 - {u1Id: 1, u2Id: 3, scoreU1: 45, scoreU2: 40, win: true, gameId:2}
+• For game with gameId 1 leaderboard will be
+o U2 -Rank 1, totalWins 2, totalPoints - 85
+o U3 - Rank 3, totalWins 0, totalPoints - 40
+o U1 - Rank 2, totalWins 0, totalPoints - 30 
+• For game with gameId 2 leaderboard will be
+o U1 - Rank 1, totalWins 1, totalPoints - 45
+o U3 - Rank 2, totalWins 0, totalPoints - 40
+Use an appropriate database to handle the problem. The server needs to expose the 
+features via APIs based on REST principles and event driven logic to be implemented in 
+every possible situation. Additionally, write appropriate test cases to simulate practical 
+scenarios that you would want to test the system for. Maintain the code through the course 
+of the development on a version control system.This document is the sole property of Parkinnov Funtech Pvt. Ltd. & information presented is
+strictly confidential. Don’t duplicate or distribute without the consent of the company.
+Submission:
+1. Postman collection for the APIs and relevant credentials to test out
+2. Access to the code repository hosted on Gitlab/Bitbucket in a private repo
+Please Note: You are expected to design APIs on your own
